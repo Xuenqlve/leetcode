@@ -1,5 +1,7 @@
 package array
 
+import "fmt"
+
 //整数数组 nums 按升序排列，数组中的值 互不相同 。
 //在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。
 //给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。
@@ -25,15 +27,17 @@ package array
 //-104 <= target <= 104
 
 // 二分查找， 二分后 肯定有一部分的数据是有序的，通过二分找到目标值所在的有序数组，从有序的数据中查找目标值。
-// 核心点 利用k 值 与 二分后mid值比较
+// 核心点 利用k值(旋转点) 与 二分后mid值比较
 //			如果k值 大于 mid值 则 mid后数据为有序数据
 //			如果k值 小于 mid值 则 mid前数据为有序数据
+//          找到有序数据后，用有序数据的左右边界 判断target 是否在有序数据中
 
 func search(nums []int, target int) int {
 	l := 0
 	r := len(nums) - 1
 	for l <= r {
 		mid := (l + r) / 2
+		fmt.Println("mid", nums[mid])
 		if nums[mid] == target {
 			return mid
 		} else if nums[0] <= nums[mid] {

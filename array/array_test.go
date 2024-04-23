@@ -5,6 +5,21 @@ import (
 	"testing"
 )
 
+func TestLargestRectangleArea(t *testing.T) {
+
+	t.Run("largestRectangleArea", func(t *testing.T) {
+		heights := []int{1, 3, 4, 2, 1}
+		area := largestRectangleArea(heights)
+		t.Logf("area:%v", area)
+	})
+
+	t.Run("largestRectangleArea", func(t *testing.T) {
+		heights := []int{1, 1}
+		area := largestRectangleArea(heights)
+		t.Logf("area:%v", area)
+	})
+}
+
 func TestRemoveDuplicates2(t *testing.T) {
 	t.Run("removeDuplicates2", func(t *testing.T) {
 		nums := []int{0, 0, 0, 0, 1, 1, 2, 3, 3, 3, 4, 5, 6}
@@ -465,7 +480,7 @@ func TestSearchRange(t *testing.T) {
 func TestSearch(t *testing.T) {
 	t.Run("search", func(t *testing.T) {
 		nums := []int{4, 5, 6, 7, 0, 1, 2}
-		target := 0
+		target := 6
 		index := search(nums, target)
 		t.Logf("index:%v", index)
 	})
@@ -473,7 +488,7 @@ func TestSearch(t *testing.T) {
 	t.Run("search", func(t *testing.T) {
 		nums := []int{1}
 		target := 1
-		index := search(nums, target)
+		index := search2(nums, target)
 		t.Logf("index:%v", index)
 	})
 }
