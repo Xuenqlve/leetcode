@@ -5,6 +5,28 @@ import (
 	"testing"
 )
 
+func TestMaximalRectangle(t *testing.T) {
+	t.Run("maximalRectangle", func(t *testing.T) {
+		matrix := [][]byte{
+			{'1', '0', '1', '0', '0'},
+			{'1', '0', '1', '1', '1'},
+			{'1', '1', '1', '1', '1'},
+			{'1', '0', '0', '1', '0'}}
+		maxA := maximalRectangle(matrix)
+		t.Logf("maxA: %v", maxA)
+
+	})
+
+	t.Run("maximalRectangle", func(t *testing.T) {
+		matrix := [][]byte{
+			{'0', '1'},
+			{'0', '1'}}
+		maxA := maximalRectangle(matrix)
+		t.Logf("maxA: %v", maxA)
+	})
+
+}
+
 func TestLargestRectangleArea(t *testing.T) {
 
 	t.Run("largestRectangleArea", func(t *testing.T) {

@@ -17,7 +17,57 @@ package array
 //1 <= row, cols <= 200
 //matrix[i][j] 为 '0' 或 '1'
 
-func maximalRectangle(matrix [][]byte) int {
+// 解题思路：从下往上，从右往左，先算出每个点的最大宽度，
+// 取右下角节点向上遍历,
+// 0 , 1 , 0 , 1
+// 0 , 1 , 1 , 1  ^
+// 1 , 1 , 1 , 1  |
+//            <-
+// matrix[2][3] 当前节点最大宽度为 4 宽度取4 高度为 1  当前最大面积 4
+// matrix[1][3] 当前节点最大宽度为 3 宽度取3 高度为 2  当前最大面积 6
+// matrix[0][3] 当前节点最大宽度为 1 宽度取1 高度为 3  当前最大面积 3
 
-	return -1
+func maximalRectangle(matrix [][]byte) int {
+	left := make([][]int, len(matrix))
+	for i := 0; i < len(matrix); i++ {
+		lefti := make([]int, len(matrix[i]))
+		if matrix[i][0] == '1' {
+			lefti[0] = 1
+		}
+		for j := 1; j < len(matrix[i]); j++ {
+			if matrix[i][j] == '1' {
+				lefti[j] = lefti[j-1] + 1
+			} else {
+				lefti[j] = 0
+			}
+		}
+		left[i] = lefti
+	}
+
+	maxA := 0
+	for i := len(left) - 1; i >= 0; i-- {
+		for j := len(left[i]) - 1; j >= 0; j-- {
+			if left[i][j] == 0 {
+				continue
+			}
+			w := left[i][j]
+			h := 1
+			if maxA < w*h {
+				maxA = w * h
+			}
+			for k := i - 1; k >= 0; k-- {
+				if left[k][j] == 0 {
+					break
+				}
+				if left[k][j] < w {
+					w = left[k][j]
+				}
+				h++
+				if maxA < w*h {
+					maxA = w * h
+				}
+			}
+		}
+	}
+	return maxA
 }
