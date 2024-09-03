@@ -1,5 +1,7 @@
 package array
 
+import "fmt"
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -35,6 +37,34 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func buildTree(preorder []int, inorder []int) *TreeNode {
+func (n *TreeNode) RangePrint() {
+	fmt.Println("root print:", n.Val)
+	if n.Left != nil {
+		n.Left.RangePrint()
+	}
+	if n.Right != nil {
+		n.Right.RangePrint()
+	}
+}
 
+// 任意一颗树而言，前序遍历的形式总是
+// [ 根节点, [左子树的前序遍历结果], [右子树的前序遍历结果] ]
+// 即根节点总是前序遍历中的第一个节点。而中序遍历的形式总是
+// [ [左子树的中序遍历结果], 根节点, [右子树的中序遍历结果] ]
+
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+	root := &TreeNode{Val: preorder[0]}
+	i := 0
+	for ; i < len(inorder); i++ {
+		if inorder[i] == preorder[0] {
+			break
+		}
+	}
+	fmt.Printf("index:%v inorder:%v preorder:%v\n", i, inorder, preorder)
+	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
+	root.Right = buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
+	return root
 }

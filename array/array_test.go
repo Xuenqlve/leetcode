@@ -5,6 +5,72 @@ import (
 	"testing"
 )
 
+func TestBuildTree(t *testing.T) {
+
+	t.Run("allCellsDistOrder1", func(t *testing.T) {
+		//输入：rows = 1, cols = 2, rCenter = 0, cCenter = 0
+		//输出：[[0,0],[0,1]]
+		rows := 1
+		cols := 2
+		rCenter := 0
+		cCenter := 0
+		result := allCellsDistOrder(rows, cols, rCenter, cCenter)
+		t.Logf("result: %v", result)
+	})
+	t.Run("allCellsDistOrder2", func(t *testing.T) {
+		//输入：rows = 2, cols = 2, rCenter = 0, cCenter = 1
+		//输出：[[0,1],[0,0],[1,1],[1,0]]
+		rows := 2
+		cols := 2
+		rCenter := 1
+		cCenter := 1
+		result := allCellsDistOrder(rows, cols, rCenter, cCenter)
+		t.Logf("result: %v", result)
+	})
+	t.Run("allCellsDistOrder3", func(t *testing.T) {
+		//输入：rows = 2, cols = 3, rCenter = 1, cCenter = 2
+		//输出：[[1,2],[0,2],[1,1],[0,1],[1,0],[0,0]]
+		rows := 2
+		cols := 3
+		rCenter := 1
+		cCenter := 2
+		result := allCellsDistOrder(rows, cols, rCenter, cCenter)
+		t.Logf("result: %v", result)
+	})
+
+	t.Run("buildTree2", func(t *testing.T) {
+
+		inorder := []int{9, 3, 15, 20, 7}
+		postorder := []int{9, 15, 7, 20, 3}
+		node := buildTree2(inorder, postorder)
+		node.RangePrint()
+	})
+
+	t.Run("TreeNode print", func(t *testing.T) {
+		tn := &TreeNode{
+			Val: 3,
+			Left: &TreeNode{
+				Val:   9,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   20,
+				Left:  &TreeNode{Val: 15},
+				Right: &TreeNode{Val: 7},
+			},
+		}
+		tn.RangePrint()
+	})
+	t.Run("buildTree", func(t *testing.T) {
+		preorder := []int{3, 9, 20, 15, 7}
+		inorder := []int{9, 3, 15, 20, 7}
+		node := buildTree(preorder, inorder)
+		node.RangePrint()
+		//输出: [3,9,20,null,null,15,7]
+	})
+}
+
 func TestSubsetsWithDup(t *testing.T) {
 	t.Run("subsetsWithDup", func(t *testing.T) {
 		nums := []int{4, 4, 4, 1, 4}
