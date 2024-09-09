@@ -6,7 +6,17 @@ import (
 )
 
 func TestBuildTree(t *testing.T) {
+	t.Run("generate", func(t *testing.T) {
+		num := 6
+		list := generate(num)
+		t.Logf("list:%v", list)
+	})
 
+	t.Run("sortedArrayToBST", func(t *testing.T) {
+		nums := []int{-10, -3, 0, 5, 9}
+		nodes := sortedArrayToBST(nums)
+		nodes.RangePrint()
+	})
 	t.Run("allCellsDistOrder1", func(t *testing.T) {
 		//输入：rows = 1, cols = 2, rCenter = 0, cCenter = 0
 		//输出：[[0,0],[0,1]]

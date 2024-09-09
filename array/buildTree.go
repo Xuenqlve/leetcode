@@ -38,7 +38,7 @@ type TreeNode struct {
 }
 
 func (n *TreeNode) RangePrint() {
-	fmt.Println("root print:", n.Val)
+	fmt.Printf("root print:%v left：%v right:%v \n", n.Val, n.Left, n.Right)
 	if n.Left != nil {
 		n.Left.RangePrint()
 	}
