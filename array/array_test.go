@@ -6,8 +6,26 @@ import (
 )
 
 func TestBuildTree(t *testing.T) {
-	t.Run("generate", func(t *testing.T) {
+	t.Run("minimumTotal", func(t *testing.T) {
+		// [[2],[3,4],[6,5,7],[4,1,8,3]]
+		triangle := [][]int{
+			{2},
+			{3, 4},
+			{6, 5, 7},
+			{4, 1, 8, 3},
+		}
+		minV := minimumTotal(triangle)
+		t.Logf("minV:%v", minV)
+	})
+
+	t.Run("getRow", func(t *testing.T) {
 		num := 6
+		list := getRow(num)
+		t.Logf("list:%v", list)
+	})
+
+	t.Run("generate", func(t *testing.T) {
+		num := 7
 		list := generate(num)
 		t.Logf("list:%v", list)
 	})
